@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('log_despesas', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->unsignedBigInteger('id_despesa');
+            $table->double('valor_pago', 10, 2)->nullable(false);
+            $table->date('data_pagamento')->nullable(false);
         });
     }
 
