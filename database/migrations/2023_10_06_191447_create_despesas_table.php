@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('despesas', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string('nome', 100)->nullable(false);
+            $table->date('data_vencimento')->nullable(false);
+            $table->date('data_liberacao_pagamento')->nullable(false);
         });
     }
 
