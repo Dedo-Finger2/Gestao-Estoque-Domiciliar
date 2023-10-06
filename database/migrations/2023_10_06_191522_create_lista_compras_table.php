@@ -11,8 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('lista_compras', function (Blueprint $table) {
+        Schema::create('listas_compras', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('id_produto');
+            $table->foreign('id_produto')->references('id')->on('produtos');
             $table->timestamps();
         });
     }
