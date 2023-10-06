@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('estoques', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('id_produto');
+            $table->integer('quantidade')->nullable(false);
+            $table->double('valor_pago', 10, 2)->nullable(true);
+            $table->foreign('id_produto')->references('id')->on('produtos');
             $table->timestamps();
         });
     }
