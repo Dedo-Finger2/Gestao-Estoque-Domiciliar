@@ -9,8 +9,6 @@ class Produto extends Model
 {
     use HasFactory;
 
-    public $timestamps = false;
-
     /**
      * The attributes that are mass assignable.
      *
@@ -22,6 +20,7 @@ class Produto extends Model
         'unidade_medida',
         'quantidade_minima',
         'preco_unitario',
+        'updated_at'
     ];
 
     protected $casts = [
