@@ -13,7 +13,7 @@ class EmpresaPolicy
      */
     public function viewAny(User $user): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -21,7 +21,7 @@ class EmpresaPolicy
      */
     public function view(User $user, Empresa $empresa): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -29,7 +29,7 @@ class EmpresaPolicy
      */
     public function create(User $user): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -37,7 +37,7 @@ class EmpresaPolicy
      */
     public function update(User $user, Empresa $empresa): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -45,7 +45,7 @@ class EmpresaPolicy
      */
     public function delete(User $user, Empresa $empresa): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -53,7 +53,7 @@ class EmpresaPolicy
      */
     public function restore(User $user, Empresa $empresa): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -61,6 +61,6 @@ class EmpresaPolicy
      */
     public function forceDelete(User $user, Empresa $empresa): bool
     {
-        //
+        return true;
     }
 }
