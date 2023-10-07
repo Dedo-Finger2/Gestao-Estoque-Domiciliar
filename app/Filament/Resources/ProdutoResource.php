@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\ProdutoResource\Pages;
 use App\Filament\Resources\ProdutoResource\RelationManagers;
+use App\Models\Categoria;
 use App\Models\Produto;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
@@ -16,6 +17,8 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\Filter;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -34,7 +37,7 @@ class ProdutoResource extends Resource
                 ->description('Informações gerais sobre o produto')
                 ->collapsible(true)
                 ->schema([
-                    TextInput::make('nome')->required(),
+                    TextInput::make('nome')->required()->unique(ignoreRecord:true),
                     TextInput::make('quantidade_minima')->numeric(),
                     Select::make('unidade_medida')->options([
                         'kg' => 'KG',
@@ -64,18 +67,40 @@ class ProdutoResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('nome'),
                 ImageColumn::make('imagem'),
-                TextColumn::make('unidade_medida'),
-                TextColumn::make('quantidade_minima'),
-                TextColumn::make('preco_unitario'),
-                TextColumn::make('categorias.nome'),
+                TextColumn::make('nome')
+                ->searchable()
+                ->sortable(),
+                TextColumn::make('quantidade_minima')
+                ->sortable(),
+                TextColumn::make('unidade_medida')
+                ->sortable(),
+                TextColumn::make('preco_unitario')
+                ->sortable(),
+                TextColumn::make('categorias.nome')
+                ->searchable(),
+                TextColumn::make('updated_at')
+                    ->date("D - d/m/Y")
+                    ->sortable()
+                    ->label('Última compra')
+                    ->toggleable(),
             ])
             ->filters([
-                //
+                Filter::make('arrozes')->query(
+                    function (Builder $query): Builder {
+                        return $query->where('nome', 'like', 'arroz');
+                    }
+                ),
+                SelectFilter::make('categorias')
+                ->relationship('categorias', 'nome')
+                ->multiple()
+                ->preload()
+                ->searchable(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\ViewAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
