@@ -32,4 +32,9 @@ class Produto extends Model
         return $this->belongsToMany(Categoria::class, 'produtos_categorias', 'id_produto', 'id_categoria');
     }
 
+    public function estoques()
+    {
+        return $this->belongsToMany(Estoque::class, 'produtos_em_estoque', 'id_produto', 'id_estoque');
+    }
+
 }
