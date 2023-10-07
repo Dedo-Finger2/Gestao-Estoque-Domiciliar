@@ -13,7 +13,7 @@ class ProdutoPolicy
      */
     public function viewAny(User $user): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -21,7 +21,7 @@ class ProdutoPolicy
      */
     public function view(User $user, Produto $produto): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -29,7 +29,7 @@ class ProdutoPolicy
      */
     public function create(User $user): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -37,7 +37,7 @@ class ProdutoPolicy
      */
     public function update(User $user, Produto $produto): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -45,7 +45,7 @@ class ProdutoPolicy
      */
     public function delete(User $user, Produto $produto): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -53,7 +53,7 @@ class ProdutoPolicy
      */
     public function restore(User $user, Produto $produto): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -61,6 +61,6 @@ class ProdutoPolicy
      */
     public function forceDelete(User $user, Produto $produto): bool
     {
-        //
+        return true;
     }
 }
