@@ -6,9 +6,16 @@ use App\Filament\Resources\ProdutoResource\Pages;
 use App\Filament\Resources\ProdutoResource\RelationManagers;
 use App\Models\Produto;
 use Filament\Forms;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TagsInput;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -23,7 +30,17 @@ class ProdutoResource extends Resource
     {
         return $form
             ->schema([
-                //
+                TextInput::make('nome')->required(),
+                FileUpload::make('imagem')->disk('public')->directory('images'),
+                Select::make('unidade_medida')->options([
+                    'kg' => 'KG',
+                    'l' => 'L',
+                    'penca' => 'Penca',
+                    'unidade' => 'Unidade'
+                ])->required(),
+                TextInput::make('quantidade_minima')->numeric(),
+                TextInput::make('preco_unitario')->numeric()->step('any'),
+                Select::make('categorias')->multiple()->relationship('categorias','nome')
             ]);
     }
 
@@ -31,7 +48,12 @@ class ProdutoResource extends Resource
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('nome'),
+                ImageColumn::make('imagem'),
+                TextColumn::make('unidade_medida'),
+                TextColumn::make('quantidade_minima'),
+                TextColumn::make('preco_unitario'),
+                TextColumn::make('categorias.nome'),
             ])
             ->filters([
                 //
