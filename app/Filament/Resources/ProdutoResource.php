@@ -37,6 +37,7 @@ class ProdutoResource extends Resource
                 ->description('Informações gerais sobre o produto')
                 ->collapsible(true)
                 ->schema([
+
                     TextInput::make('nome')->required()->unique(ignoreRecord:true),
                     TextInput::make('quantidade_minima')->numeric(),
                     Select::make('unidade_medida')->options([
@@ -45,6 +46,7 @@ class ProdutoResource extends Resource
                         'penca' => 'Penca',
                         'unidade' => 'Unidade'
                     ])->required(),
+
                     TextInput::make('preco_unitario')->numeric()->step('any'),
                 ])->columns(2)
                 ->columnSpan(1),
@@ -53,8 +55,14 @@ class ProdutoResource extends Resource
                     ->description('Imagem e categorias do produto')
                     ->collapsible(true)
                     ->schema([
-                        FileUpload::make('imagem')->disk('public')->directory('images'),
-                        Select::make('categorias')->multiple()->relationship('categorias','nome')
+
+                        FileUpload::make('imagem')->disk('public')
+                        ->directory('images'),
+
+                        Select::make('categorias')->multiple()
+                        ->relationship('categorias','nome')
+                        ->preload(),
+
                     ])->columnSpan(1),
             ])->columns([
                 'default' => 1,

@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -13,11 +14,8 @@ return new class extends Migration
     {
         Schema::create('estoques', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_produto');
-            $table->integer('quantidade')->nullable(false);
-            $table->double('valor_pago', 10, 2)->nullable(true);
-            $table->foreign('id_produto')->references('id')->on('produtos');
-            $table->timestamps();
+            $table->timestampTz('created_at')->unique()->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestampTz('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
         });
     }
 
