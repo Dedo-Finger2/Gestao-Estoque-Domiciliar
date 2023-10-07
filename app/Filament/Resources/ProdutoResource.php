@@ -30,17 +30,33 @@ class ProdutoResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('nome')->required(),
-                FileUpload::make('imagem')->disk('public')->directory('images'),
-                Select::make('unidade_medida')->options([
-                    'kg' => 'KG',
-                    'l' => 'L',
-                    'penca' => 'Penca',
-                    'unidade' => 'Unidade'
-                ])->required(),
-                TextInput::make('quantidade_minima')->numeric(),
-                TextInput::make('preco_unitario')->numeric()->step('any'),
-                Select::make('categorias')->multiple()->relationship('categorias','nome')
+                Section::make('Info geral')
+                ->description('Informações gerais sobre o produto')
+                ->collapsible(true)
+                ->schema([
+                    TextInput::make('nome')->required(),
+                    TextInput::make('quantidade_minima')->numeric(),
+                    Select::make('unidade_medida')->options([
+                        'kg' => 'KG',
+                        'l' => 'L',
+                        'penca' => 'Penca',
+                        'unidade' => 'Unidade'
+                    ])->required(),
+                    TextInput::make('preco_unitario')->numeric()->step('any'),
+                ])->columns(2)
+                ->columnSpan(1),
+
+                Section::make('Visualização e categoziração')
+                    ->description('Imagem e categorias do produto')
+                    ->collapsible(true)
+                    ->schema([
+                        FileUpload::make('imagem')->disk('public')->directory('images'),
+                        Select::make('categorias')->multiple()->relationship('categorias','nome')
+                    ])->columnSpan(1),
+            ])->columns([
+                'default' => 1,
+                'md' => 2,
+                'lg' => 2,
             ]);
     }
 
