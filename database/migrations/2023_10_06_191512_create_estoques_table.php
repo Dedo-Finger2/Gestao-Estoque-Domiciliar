@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('estoques', function (Blueprint $table) {
             $table->id();
-            $table->timestampTz('created_at')->unique()->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->date('created_at')->unique();
             $table->timestampTz('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
         });
     }

@@ -14,10 +14,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('produtos_em_estoques', function (Blueprint $table) {
-            $table->foreignIdFor(Produto::class, 'id_produto')->nullable(false);
-            $table->foreignIdFor(Estoque::class, 'id_estoque')->nullable(false);
+            $table->id();
+            $table->unsignedBigInteger('id_produto');
+            $table->unsignedBigInteger('id_estoque');
+            $table->foreign('id_produto')->references('id')->on('produtos');
+            $table->foreign('id_estoque')->references('id')->on('estoques');
             $table->integer('quantidade')->nullable(false);
-            $table->decimal('valor_pago', 10, 2)->nullable(false);
+            $table->decimal('valor_pago', 10, 2)->nullable(true);
         });
     }
 

@@ -13,7 +13,7 @@ class EstoquePolicy
      */
     public function viewAny(User $user): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -21,7 +21,7 @@ class EstoquePolicy
      */
     public function view(User $user, Estoque $estoque): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -29,7 +29,7 @@ class EstoquePolicy
      */
     public function create(User $user): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -37,7 +37,7 @@ class EstoquePolicy
      */
     public function update(User $user, Estoque $estoque): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -45,7 +45,7 @@ class EstoquePolicy
      */
     public function delete(User $user, Estoque $estoque): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -53,7 +53,7 @@ class EstoquePolicy
      */
     public function restore(User $user, Estoque $estoque): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -61,6 +61,6 @@ class EstoquePolicy
      */
     public function forceDelete(User $user, Estoque $estoque): bool
     {
-        //
+        return true;
     }
 }
