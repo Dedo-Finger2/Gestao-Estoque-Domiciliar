@@ -9,11 +9,6 @@ class Produto extends Model
 {
     use HasFactory;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'nome',
         'imagem',
@@ -39,7 +34,7 @@ class Produto extends Model
 
     public function produtosEmEstoque()
     {
-        return $this->hasMany(ProdutoEmEstoque::class, 'id_estoque');
+        return $this->hasMany(ProdutoEmEstoque::class, 'id_estoque', );
     }
 
 }
