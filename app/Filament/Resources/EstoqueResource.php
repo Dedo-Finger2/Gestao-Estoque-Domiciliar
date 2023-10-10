@@ -4,12 +4,17 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\EstoqueResource\Pages;
 use App\Filament\Resources\EstoqueResource\RelationManagers;
+use App\Filament\Resources\EstoqueResource\RelationManagers\ProdutosEmEstoquesRelationManager;
 use App\Models\Estoque;
+use App\Models\Produto;
 use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
-use Filament\Forms\Components\DateTimePicker;
-use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
+use Filament\Infolists\Components\ImageEntry;
+use Filament\Infolists\Components\RepeatableEntry;
+use Filament\Infolists\Components\Section;
+use Filament\Infolists\Components\TextEntry;
+use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
@@ -60,10 +65,19 @@ class EstoqueResource extends Resource
             ]);
     }
 
+    public static function infolist(Infolist $infolist): Infolist
+    {
+        return $infolist->schema([
+            Section::make('Data do estoque')->schema([
+                TextEntry::make('created_at')->date('d/m/Y')->size(20)->hiddenLabel(),
+            ]),
+        ]);
+    }
+
     public static function getRelations(): array
     {
         return [
-            //
+            ProdutosEmEstoquesRelationManager::class,
         ];
     }
 
@@ -72,6 +86,7 @@ class EstoqueResource extends Resource
         return [
             'index' => Pages\ListEstoques::route('/'),
             'create' => Pages\CreateEstoque::route('/create'),
+            'view' => Pages\ViewEstoque::route('/{record}'),
             'edit' => Pages\EditEstoque::route('/{record}/edit'),
         ];
     }

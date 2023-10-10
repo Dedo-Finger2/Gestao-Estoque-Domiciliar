@@ -99,6 +99,7 @@ class ProdutoResource extends Resource
                         return $query->where('nome', 'like', 'arroz');
                     }
                 ),
+
                 SelectFilter::make('categorias')
                 ->relationship('categorias', 'nome')
                 ->multiple()

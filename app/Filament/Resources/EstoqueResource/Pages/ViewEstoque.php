@@ -4,17 +4,16 @@ namespace App\Filament\Resources\EstoqueResource\Pages;
 
 use App\Filament\Resources\EstoqueResource;
 use Filament\Actions;
-use Filament\Resources\Pages\EditRecord;
+use Filament\Resources\Pages\ViewRecord;
 
-class EditEstoque extends EditRecord
+class ViewEstoque extends ViewRecord
 {
     protected static string $resource = EstoqueResource::class;
 
     protected function getHeaderActions(): array
     {
         return [
-            Actions\ViewAction::make(),
-            Actions\DeleteAction::make(),
+            Actions\EditAction::make(),
         ];
     }
 }

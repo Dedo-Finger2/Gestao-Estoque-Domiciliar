@@ -29,12 +29,11 @@ class Produto extends Model
 
     public function estoques()
     {
-        return $this->belongsToMany(Estoque::class, 'produtos_em_estoque', 'id_produto', 'id_estoque');
+        return $this->belongsToMany(Estoque::class, 'produtos_em_estoques', 'id_produto', 'id_estoque');
     }
 
-    public function produtosEmEstoque()
+    public function produtosEmEstoques()
     {
-        return $this->hasMany(ProdutoEmEstoque::class, 'id_estoque', );
+        return $this->hasMany(ProdutoEmEstoque::class, 'id_produto', 'id');
     }
-
 }
